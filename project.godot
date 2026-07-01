@@ -14,10 +14,19 @@ config/name="FriendslopEZPZ"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SteamInfo="*uid://bnrrf8q027js4"
+Network="*uid://cq3b8bnp6no5g"
+
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/easy_peasy_multiplayer/plugin.cfg")
 
 [physics]
 

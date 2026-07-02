@@ -1,290 +1,359 @@
+# GDD – *[Arbeitstitel: siehe Kapitel 15]*
 
-
-> **Working Title:** FriendslopEZPZ  
-> **Engine:** Godot 4.7+ (Forward Plus)  
-> **Genre:** Co-op Prison Escape (Action + Chaos)  
-> **Players:** normale Co-Op grössen
-> **Networking:** easy-peasy-multiplayer 2.0 (ENet, kein Steam nötig, selsbt wenn nd so bad ngl)  
-> **Target Price:** $5–8 Launch  (unter 5€ pusht es staem nicht, über setzt zu hohe expectations)
-
----
-
-## Vision
-
-Ein chaotisches Co-op Prison Escape Game wo jede Runde anders läuft.  
-Kein scripted Ablauf – Systeme knallen aufeinander und produzieren Geschichten.  
-Proximity Voice + Emergent Gameplay = Clip-Maschine für YouTube.
+**Engine:** Godot 4.7+ (Forward+), reines GDScript, kein C#
+**Genre:** Co-op Prison Escape (Emergent Immersive Sim + Chaos)
+**Networking:** easy-peasy-multiplayer (2.0-refactor Branch), ENet, kein Steam nötig
+**Spieleranzahl:** 2–6 (Sweetspot 3–4)
+**Target Price:** $5–8 Launch
 
 ---
 
-## Core Pillars
+## 1. High-Concept / Pitch
 
-- **Action + Chaos** – schnelle Runden, laute Momente, scheitern ist lustig
-- **Proximity Voice** – nah redet man normal, weiter weg leiser, Wachen hören mit
-- **Wiederspielbarkeit** – procedural generiertes Gefängnis, random Events, verschiedene Persönlichkeiten pro Wache
-- **Clip-worthy** – jedes Spiel produziert 1-2 Momente die man ausschneiden und hochladen will
+Du wachst in einer Zelle auf. Du kennst niemanden. Du hast nichts. In 15–20 Minuten
+musst du mit ein paar Fremden (deinen Freunden) aus einem Gefängnis fliehen, das nie
+zweimal gleich aussieht, bewacht von Wachen, die nie zweimal gleich reagieren.
+Es gibt kein Skript, das dir sagt "so gewinnst du" – es gibt nur Systeme, die
+aufeinanderprallen, und die Frage: **wie schlau seid ihr gemeinsam?**
 
----
-
-## Game Flow
-
-1. **Lobby** – Host erstellen / IP joinen, Name setzen, Spielerliste
-2. **Runden-Start** – Gefängnis wird procedural generiert (mit Seed)
-3. **Playing** – Spieler spawnen im Cellblock, müssen Items sammeln und Ausgang finden
-4. **Flucht** – Alle Requirements erfüllt → Exit-Raum freigeschaltet → alle raus = Win
-5. **Runden-Ende** – 5s Recap, zurück zur Lobby, nächste Runde
+Kein Skript heißt: keine gescriptete Lösung ist "die richtige". Jede Flucht ist ein
+improvisierter Heist, der aus den Regeln der Welt entsteht, nicht aus
+Leveldesign-Handlungssträngen.
 
 ---
 
-## Room-System
+## 2. Design-Philosophie
 
-### Room-Templates (aktuell 12)
+**Die eine Faustregel, die über allem steht:**
 
-| Raum | Kategorie | Security | Spawns | Besonderheit |
-|------|-----------|----------|--------|--------------|
-| Cellblock | CELLBLOCK | 0 | niedrig | Startraum, immer da |
-| Cafeteria | CAFETERIA | 0 | niedrig | Viel Platz, oft mehrere Türen |
-| Guard Office | GUARD_OFFICE | 2 | niedrig | Alarm-Button, high-security |
-| Yard | YARD | 0 | niedrig | Offen, Wachen haben freie Sicht |
-| Infirmary | INFIRMARY | 1 | medium | Medkits, Skalpelle |
-| Storage | STORAGE | 1 | medium | Zufälliger Loot, dunkel |
-| Vent Shaft | VENT_SHAFT | 1 | keiner | Geheimgang zwischen Etagen |
-| Armory | ARMORY | 2 | hoch | Waffen + Keycards, stark bewacht |
-| Laundry | LAUNDRY | 0 | niedrig | Uniformen, Versteck-Möglichkeit |
-| Shower | SHOWER | 0 | niedrig | Offen, wenig Deckung |
-| Library | LIBRARY | 0 | niedrig | Ruhig, Wachen ignorieren oft |
-| Exit | EXIT | 2 | keiner | Flucht-Endpunkt, immer da |
+> Nie "der Spieler kann X tun" programmieren. Systeme programmieren (Licht, Sound,
+> Autorität, Hunger, Aufmerksamkeit, Vertrauen) und sie aufeinander knallen lassen.
 
-### Prozedurale Generierung
+Drei harte Design-Gesetze:
 
-- **Graph-basiert**: Räume werden als Nodes mit `door_points` verbunden
-- **Pro Floor**: 6 Räume pro Etage, 2 Etagen Standard
-- **Seed-basiert**: Gleicher Seed = gleiches Gefängnis (für Replays/Sharing)
-- **Required Rooms**: Cellblock + Exit sind Pflicht
-- **Restricted Rooms**: Manche Räume nur 1x pro Map (Armory, Guard Office, etc.)
-- **Weighted Selection**: Räume haben Gewichtung – Storage kommt öfter als Armory
-- **Extra Connections**: Lüftungsschächte als Random-Verbindungen zwischen nicht-benachbarten Räumen
-
-### Layout-Algorithmus
-
-1. Required Rooms platzieren (Cellblock, Exit)
-2. Restliche Räume per Weighted Random füllen
-3. Grid-Layout (x = Raumposition, y = Etage)
-4. Connections: benachbarte Räume = Türen, übereinander = Treppen
-5. Extra: Random-Vents für alternative Routen
-6. Loot pro Raum spawnen basierend auf Security-Level
+1. **Jedes Problem hat mindestens 3 Lösungen.** Wenn ein Playtest zeigt, dass ein
+   Raum/Hindernis nur einen Lösungsweg hat, ist das ein Bug, kein Feature.
+   (Beispiel: Wachtturm blockiert den Hof → A: Ablenkung, B: Stromausfall,
+   C: Verkleidung, D: einfach schnell genug sein.)
+2. **Kein Skript ersetzt eine Regel.** Keine "wenn Spieler X tut, dann Cutscene Y" –
+   alles läuft über Zustände (State Machines, Werte, Trigger-Schwellen), die für
+   Spieler *lesbar* und *ausnutzbar* sind.
+3. **Fairness kommt aus Transparenz, nicht aus Balance.** Der Spieler darf verlieren,
+   weil er einen Fehler gemacht hat, den er hätte sehen können – nie weil ein
+   Würfelwurf im Hintergrund unsichtbar gegen ihn lief.
 
 ---
 
-## Emergent Gameplay Systeme
+## 3. Core Pillars
 
-### Wachen-Verhalten (5 Persönlichkeiten)
+- **Emergenz statt Skript** – jede Runde ist eine neue Geschichte, weil Systeme
+  interagieren, nicht weil Content abgespult wird
+- **Gear + Skill, nie Klasse** – dein Charakter hat keine Attribute. Was du kannst,
+  hängt davon ab, was du in der Runde findest und wie gut du es einsetzt
+- **Proximity Voice als Gameplay-Mechanik**, nicht nur Comfort-Feature
+- **Wiederspielbarkeit durch Prozedural + Persönlichkeit**
+- **Clip-Fabrik** – jede Runde soll 1–2 screenrecordbare Momente produzieren
+
+---
+
+## 4. Charakter-Design: "Die Hülle"
+
+### 4.1 Grundprinzip
+
+Dein Häftling ist **keine Klasse, keine Rolle, kein Build**. Er ist eine Hülle:
+Körper, Gesicht, Stimme, Nummer auf der Uniform. Zwei Spieler auf Level 1 und
+Level 80 sind **mechanisch identisch**, wenn die Zellentür aufgeht.
+
+Sieg/Niederlage entsteht ausschließlich aus:
+
+1. **Gear** – was du in dieser konkreten Runde findest, trägst und kombinierst
+2. **Skill** – Timing, Kommunikation, Game-Sense, Entscheidungen unter Druck
+
+Keine Klassen, kein "der Hacker", kein "der Tank". Jeder Spieler ist ein
+General-Purpose-Häftling; die *Situation* bestimmt, wer gerade Ablenker, Schleicher
+oder Kämpfer ist – nicht ein Menü-Screen vor Rundenbeginn.
+
+### 4.2 Charakter-Erstellung (rein kosmetisch)
+
+- Modularer Avatar-Baukasten: Kopf/Frisur/Bart, Körpertyp (rein visuell),
+  Hautfarbe/Tattoos, Uniform-Variante (Farbe, Abnutzung, Patches)
+- Stimme: Pitch-Slider + Bark-Sets (Schmerzlaute, Ablenkungsrufe, "Psst"-Callouts) –
+  kosmetisch, keine Gameplay-Wirkung
+- Persönliche "Marke": freischaltbares Graffiti-Tag für die Zelle (siehe 4.4)
+
+### 4.3 Design-Begründung
+
+- **Fairness in Randomizer-Lobbies**: Wer joint, spielt sofort mit, ohne von einem
+  Grinder mit besserem Loadout dominiert zu werden
+- **Fokus auf Moment-to-Moment-Entscheidungen** statt Meta-Optimierung
+- **Passt zum Genre**: Prison Break lebt von Cleverness und Improvisation
+
+### 4.4 Progression – "Das Vorstrafenregister" (Rap Sheet)
+
+Account-weites Meta-System, ARC-Raiders-inspiriert, aber entschärft:
+
+- Jede Runde (auch gescheiterte Fluchten!) gibt XP → Account-Level
+- Pro Level: 1 Punkt für den **Contraband-Baum** – Nodes bewusst *horizontal*:
+  - **Kosmetik-Freischaltungen** (Hauptbelohnung): Uniform-Patterns, Tattoos,
+    Graffiti-Tags, Emotes, Voice-Barks
+  - **Mikro-Perks** (max. 3 gleichzeitig aktiv, wählbar vor Rundenstart):
+    kleine, klar kommunizierte Prozent-Werte, NIEMALS ein neues Verb.
+    Beispiele: "Leisere Schritte beim Rennen (−8%)", "Ein Inventarslot mehr",
+    "Schlösser 10% schneller knacken", "Uniform-Tarnung wird 5% später erkannt"
+  - **Keine Powerspikes:** Perks verschieben Wahrscheinlichkeiten leicht, schalten
+    nie einen Lösungsweg frei, der Neulingen verwehrt bleibt
+  - **Respec jederzeit kostenlos** – Experimentieren fördern, nicht bestrafen
+  - **Season Wipe / "Lockdown"-Event** (optional): kosmetische Season-Rewards,
+    kein Gameplay-Vorteil über Runden hinaus
+
+**Design-Grenze:** Das Rap Sheet existiert für den Dranbleib-Loop, darf aber nie der
+Grund sein, warum ein Team gewinnt. Wenn ein Level-1-Spieler mit gutem Gear und
+Timing genauso gut fliehen kann wie ein Level-80-Spieler, funktioniert das System.
+
+---
+
+## 5. Game Flow
+
+1. **Lobby** – Host erstellen/IP joinen, Name + Aussehen wählen, Ready-Check
+2. **Rundenstart** – Gefängnis wird prozedural generiert (Seed),
+   Wachen-Persönlichkeiten gewürfelt, 1–2 Random Events aktiv
+3. **Playing** – Spawn im Cellblock, Flucht-Requirements unbekannt bis erkundet,
+   Loot sammeln, Wachen umgehen/ablenken/austricksen
+4. **Flucht-Fenster** – Requirements erfüllt → Exit öffnet, Uhr tickt
+5. **Rundenende** – Recap (wer hat was gemacht, lustigste Momente), zurück zur Lobby
+
+---
+
+## 6. Room-System & Prozedurale Generierung
+
+### 6.1 Room-Templates (12, erweiterbar)
+
+| Raum | Security | Besonderheit |
+|------|----------|--------------|
+| Cellblock | 0 | Startraum, immer da |
+| Cafeteria | 0 | Viel Platz, Essensausgabe (Ablenkungs-Hub) |
+| Guard Office | 2 | Alarm-Button, Kameras steuerbar |
+| Yard | 0 | Offen, freie Sicht, Hund-Event möglich |
+| Infirmary | 1 | Medkits, Skalpelle |
+| Storage | 1 | Zufälliger Loot, dunkel, Verstecken möglich |
+| Vent Shaft | 1 | Geheimgang zwischen Etagen |
+| Armory | 2 | Waffen + Keycards, stark bewacht |
+| Laundry | 0 | Uniformen (Tarnung), Versteck |
+| Shower | 0 | Offen, wenig Deckung, Dampf blockiert Sicht |
+| Library | 0 | Ruhig, Wachen patrouillieren selten |
+| Exit | 2 | Flucht-Endpunkt |
+
+### 6.2 Generierungslogik
+
+- Graph-basiert, Nodes + `door_points`
+- 6 Räume/Etage, 2 Etagen Standard, seed-basiert
+- Required Rooms (Cellblock, Exit), Restricted Rooms (1x pro Map), Weighted Selection
+- Extra Vent-Connections als Random-Shortcuts
+
+**Room-Zustände statt nur Room-Typen:** Jeder Raum hat zusätzlich zum Typ einen
+laufenden Systemzustand (Licht an/aus, Stromkreis, Lärmpegel, Wachenpräsenz).
+Der Raum-Typ ist die Bühne, der Zustand ist das, womit Spieler interagieren.
+
+---
+
+## 7. Emergente Systeme (das Herzstück)
+
+### 7.1 Die vier Kern-Systeme
+
+| System | Was es tut | Wie andere Systeme es nutzen |
+|--------|-----------|-------------------------------|
+| **Sound** | Jede Aktion erzeugt Lärm-Quelle mit Radius + Lautstärke, durch Wände abgeschwächt | Wachen reagieren, Lärm als Ablenkung, Proximity Voice ist Teil davon |
+| **Licht/Strom** | Stromkreise pro Sektion, überlastbar, abschaltbar | Dunkelheit senkt Wachen-Sichtradius, aber auch Spieler-Sicht |
+| **Autorität/Alarm** | Globaler Alarm-Meter pro Etage, steigt bei Verdacht, sinkt mit Zeit | Wachen-Verstärkung, Kamera-Aktivierung, Lockdown-Türen |
+| **Vertrauen/Tarnung** | Wärter-Uniform + unauffälliges Verhalten = niedrigere Entdeckungschance | Kombiniert mit Nähe, Blickwinkel, Wachen-Persönlichkeit |
+
+### 7.2 Wachen-Verhalten (5 Persönlichkeiten)
 
 | Typ | Vision | Hearing | Alert-Speed | Verhalten |
 |-----|--------|---------|-------------|-----------|
 | STRICT | 1.2x | 1.2x | schnell | Hört jeden Lärm |
 | LAZY | 0.6x | 0.5x | langsam | Ignoriert vieles |
-| CORRUPT | 0.8x | 0.7x | sehr langsam | Lässt sich von Items ablenken |
+| CORRUPT | 0.8x | 0.7x | sehr langsam | Bestechlich |
 | PARANOID | 1.1x | 1.3x | extrem schnell | Schlägt sofort Alarm |
 | CARELESS | 0.5x | 0.6x | langsam | Übersieht Spieler leicht |
 
-### Guard States
+**Guard States:** PATROL → SUSPICIOUS → ALERT → SEARCHING → CALLING
 
-- **PATROL** – normale Route, 4-8 zufällige Punkte
-- **SUSPICIOUS** – hat was gehört/gesehen, geht Richtung Quelle
-- **ALERT** – verfolgt Spieler, sprintet
-- **SEARCHING** – sucht nach Verlust (8s Timer)
-- **CALLING** – ruft Verstärkung (dauert je nach Persönlichkeit)
+**Wachen reden mit dem System, nicht mit Spielern direkt:** Eine Wache weiß nicht
+"Spieler X ist verdächtig", sie kennt nur Werte (Lärm-Event bei Position Y,
+Lautstärke Z). Exploits funktionieren *immer*, weil sie echte Systemregeln nutzen.
 
-### Sound-Propagation
+### 7.3 System-Kombinationen (Beispiele)
 
-- Lärm breitet sich realistisch aus
-- Umgeworfener Stuhl in Raum A zieht nächste Wache an
-- Wache in Raum B bleibt ahnungslos
-- Spieler lernen Sound als Werkzeug zu nutzen
+- Essensausgabe + Vent = Essen durchs Rohr schieben, Wache verlässt Posten
+- Stromkreis überlasten → Sicherung raus → Dunkelheit → aber auch Kameras tot
+- Feueralarm → Chaos-Modus, alle NPCs rennen zum Sammelpunkt, Spieler tauchen unter
+- Uniform aus Laundry + ruhiges Gehen = Tarnung, bricht bei Nahdistanz zu STRICT
+- Bestechung (Item an CORRUPT) senkt deren Alert-Radius für X Sekunden
+- **Mitgefangene als NPC-Systemteilnehmer** – Insassen sind Lärmquellen/Sichtblocker,
+  Herden-Tarnung in Gruppen
 
-### System-Interaktionen
+### 7.4 Spieler-Kombinationen
 
-- Essensausgabe + Lüftungsschacht = Essen durch Schacht bugsieren, Wache ablenken
-- Stromkreise überlasten (viele Geräte an) → Sicherung fliegt raus → Dunkelheit → Fluchtchance
-- Feueralarm auslösen → Chaos → alle sprinten
-- Wachen bestechen (Corrupt-Trait) mit Items
+- Spieler A redet laut mit Wache (Proximity Voice als Werkzeug), B schleicht vorbei
+- Spieler C löst Stromausfall aus, während A+B im Zielraum warten
+- Ein Spieler "opfert" sich (Einzelhaft/Cooldown statt Game Over), bindet Aufmerksamkeit
 
-**Faustregel:** Nie "der Spieler kann X tun" programmieren.  
-Systeme programmieren (Licht, Sound, Autorität, Hunger, Aufmerksamkeit) und aufeinander knallen lassen.
+**Faustregel:** Neues Feature = nur "E drücken, X passiert"? Abgelehnt, bis es an
+mindestens zwei der vier Kern-Systeme angebunden ist.
 
 ---
 
-## Items & Loot
+## 8. Items & Loot
 
-### Item-Typen
+### 8.1 Item-Typen
 
-- **Tool** – crowbar, keycard, wire_cutters, uniform (Flucht-Requirements)
-- **Weapon** – Schraubenschlüssel, Skalpell, Brechstange (auch als Waffe nutzbar)
-- **Food** – heilt, macht Lärm beim Essen
-- **Key** – spezifische Türen öffnen
-- **Misc** – Zahnbürste (spitzen = Waffe / Dietrich / ablenken)
+- **Tool** – Crowbar, Keycard, Wire Cutters, Uniform (Flucht-Requirements)
+- **Weapon** – Schraubenschlüssel, Skalpell, Brechstange (Doppelnutzung Werkzeug/Waffe)
+- **Food** – heilt, macht beim Essen Lärm (Trade-off)
+- **Key** – spezifische Türen
+- **Misc** – Zahnbürste (Waffe/Dietrich/Ablenkung), Spiegelscherbe (um Ecken schauen),
+  Seife (Boden glitschig = Ablenkungs-Trap)
 
-### Loot-Tables pro Raum
+### 8.2 Items als einziger Machtfaktor
 
-- **Armory** → Schraubenschlüssel, Waffen, Keycards
+Da Charaktere keine Stats haben, ist die Item-Ökonomie das gesamte Powergefühl
+innerhalb einer Runde. Loot-Tables, Spawn-Raten, Kombinierbarkeit = einzige
+Stellschraube für Schwierigkeitskurve.
+
+- **Armory** → Werkzeuge, Waffen, Keycards (hohes Risiko/Ertrag)
 - **Infirmary** → Skalpelle, Medkits
-- **Kitchen/Cafeteria** → Messer, Essen
-- **Storage** → Zufall, meist nützlicher Kram
-- **Laundry** → Uniform (Verkleidung)
-- **Guard Office** → Keycards, Funkgerät
+- **Cafeteria** → Messer, Essen, Ablenkungspotential
+- **Storage** → Zufall
+- **Laundry** → Uniform (Tarnung)
+- **Guard Office** → Keycards, Funkgerät (Wachen-Funkverkehr mithören!)
 
-### Item-System (Resource-basiert)
+### 8.3 Item-System (Resource-basiert, GDScript)
 
-- `ItemData` Resource mit: name, description, type, tool_type, weight, stackable, effect_value
-- Items haben Side-Effects: Zahnbürste kann spitzen (Waffe), Dietrich, oder Ablenkung
-- Flucht-Requirements: 3 von 5 Items werden pro Runde zufällig als "gebraucht" markiert
-
----
-
-## Multiplayer & Networking
-
-### easy-peasy-multiplayer 2.0
-
-- **Kein Steam nötig** – reines ENet, IP-basiert
-- Host/Join über IP (+ evtl. Lobby-Code später)
-- 2-6 Spieler
-- RPC-basiert für Aktionen (collect_requirement, movement, etc.)
-
-### Architektur
-
-- **NetworkManager** (Autoload) – verwaltet Peer-Connections, Spielerliste
-- **GameManager** (Autoload) – Rundenlogik, State-Machine, Escape-Conditions
-- **PrisonGenerator** (Autoload) – generiert Gefängnis auf Server, teilt via RPC
-
-### Multiplayer-Synergien
-
-- Spieler A hält Wache ab (chatten, ablenken), Spieler B schleicht vorbei
-- Spieler C löst Feueralarm aus, im Chaos fliehen alle
-- Proximity Voice: nah = laut (Wachen hören), weit weg = leise
+- `ItemData` als `Resource`: `name`, `description`, `type`, `tool_type`, `weight`,
+  `stackable`, `effect_value`
+- `UseCase`-Tags statt harter Kategorien (Zahnbürste: `WEAPON`, `LOCKPICK`,
+  `DISTRACTION`) – mehrere Lösungswege direkt im Datenmodell
+- Flucht-Requirements: 3 von 5 Items pro Runde zufällig als "gebraucht" markiert
 
 ---
 
-## UI Struktur
+## 9. Multiplayer & Networking
 
-### Main Menu (title_screen.tscn)
+### 9.1 easy-peasy-multiplayer (2.0-refactor)
 
-- Host Button
-- Join Button + IP Input
-- Player Name Input
-- Start Button (nur Host)
-- Player List + Ready-Check
+- Plugin übernimmt MultiplayerPeers, Lobby-Erstellung, Netzwerk-Switching,
+  Server-Verbindungen
+- Kein Steam nötig, reines ENet, IP-basiert (später optional Lobby-Code-Layer)
+- 2–6 Spieler
+- RPC-basierte Aktionen (`collect_requirement`, `movement`, `interact`, ...)
+
+### 9.2 Architektur (Autoloads)
+
+- **NetworkManager** – Peer-Connections, Spielerliste, Host-Migration (Stretch)
+- **GameManager** – Rundenlogik, State-Machine, Escape-Conditions
+- **PrisonGenerator** – generiert serverseitig, Seed-Sync via RPC
+- **ProgressionManager** – Rap-Sheet-Daten lokal pro Client (kein Server-Account im MVP)
+
+---
+
+## 10. UI-Struktur
+
+### Main Menu
+- Host/Join + IP-Input, Name, Charakter-Editor, Player List + Ready-Check
 
 ### HUD
-
-- Inventar (max 4 Slots)
-- Flucht-Requirements (3 Items als Checkliste)
-- Health
-- Runden-Timer
+- Inventar (max. 4 Slots), Flucht-Requirements-Checkliste, Health, Runden-Timer
+- **Alarm-Meter** (sichtbar) – Transparenz-Prinzip aus Kapitel 2
 
 ### Debug (Dev)
-
-- Label3D mit Generierungs-Info
-- Room-Übersicht
+- Label3D mit Generierungs-Info, Room-Übersicht, Sound-Radius-Visualisierung
 
 ---
 
-## Technical Architecture
-
-### Projekt-Struktur
+## 11. Technical Architecture
 
 ```
-addons/easy_peasy_multiplayer/   # Plugin (unverändert)
+addons/easy_peasy_multiplayer/   # Plugin (2.0-refactor Branch)
 ai/
-  GuardAI.gd                     # Wachen-State-Machine
+  GuardAI.gd                     # State-Machine
 autoload/
-  GameManager.gd                 # Zentrale Spiel-Logik
-  NetworkManager.gd              # Multiplayer-Wrapper
-  PrisonGenerator.gd             # Prozedurale Generierung
+  GameManager.gd
+  NetworkManager.gd
+  PrisonGenerator.gd
+  ProgressionManager.gd          # Rap-Sheet / Contraband-Perks
 items/
-  ItemData.gd                    # Item-Resource
+  ItemData.gd
 rooms/
-  CellBlock.tscn, Cafeteria.tscn # 12 Room-Szenen
-  ...
+  *.tscn                         # 12 Room-Szenen
 scenes/
-  title_screen.tscn              # Main Menu
-  Game.tscn                      # Hauptspiel-Szene
-  Player.tscn                    # Spieler-Controller
-  Guard.tscn                     # Wachen-Instanz
-  Item.tscn                      # Item-Instanz im Raum
+  title_screen.tscn
+  Game.tscn
+  Player.tscn                    # Hülle: Movement + Interaktion, KEINE Stats
+  Guard.tscn
+  Item.tscn
 scripts/
-  RoomBase.gd                    # Basis-Klasse für Räume
-  PlayerController.gd            # Movement + Interaktion
-  GuardAI.gd                     # (siehe ai/)
-  ItemBase.gd                    # Item-Verhalten im Raum
-  GameWorld.gd                   # Baut Gefängnis aus Generierung
-  Door.gd                        # Tür-Logik (öffnen/schließen/aufbrechen)
-  MainMenu.gd                    # UI-Logik
+  RoomBase.gd
+  PlayerController.gd
+  ItemBase.gd
+  GameWorld.gd
+  Door.gd
+  MainMenu.gd
+  CharacterCosmetics.gd          # Avatar-Baukasten-Logik
 docs/
-  GDD-Prison Escape.md           # Dieses Dokument
+  GDD.md
 ```
 
-### Dependencies
-
-- Godot 4.7+
-- easy-peasy-multiplayer Plugin (ENet, kein Steam)
-- Jolt Physics (bereits aktiviert)
-- Forward Plus Renderer
-- Keine externen Abhängigkeiten
+**Dependencies:** Godot 4.7+, easy-peasy-multiplayer, Jolt Physics, Forward+,
+keine externen Abhängigkeiten, reines GDScript.
 
 ---
 
-## Events & Wiederspielbarkeit
+## 12. Events & Wiederspielbarkeit
 
-### Random Events (pro Runde 1-2)
-
-- **Inspektion heute** – mehr Wachen, höhere Alertness
-- **Ausgang gesperrt** – bestimmte Route dicht
-- **Mitgefangener hilft dir** – extra Item oder Info
-- **Wache krank** – weniger Personal
-- **Hund patrouilliert** – extre Gefahr im Hof
-- **Stromausfall** – Dunkelheit, Fluchtchance
+### Random Events (1–2 pro Runde)
+- Inspektion heute (mehr Wachen, höhere Alertness)
+- Ausgang gesperrt (Route dicht)
+- Mitgefangener hilft (extra Item/Info)
+- Wache krank (weniger Personal)
+- Hund patrouilliert (Gefahr im Hof)
+- Stromausfall (Dunkelheit, Fluchtchance)
 
 ### Routen-Variation
-
-- Mal ist Hofweg offen, mal nicht
-- Mal patrouilliert ein Hund, mal nicht
-- Mal sind bestimmte Türen verschlossen, mal offen
-- Item-Platzierungen variieren pro Runde
+Item-Platzierung, offene/verschlossene Türen, Hund ja/nein – pro Runde neu gewürfelt.
 
 ---
 
-## Dev Roadmap (Vorschlag)
+## 13. Dev Roadmap
 
-1. **Core Setup** – Projekt-Struktur, easy-peasy integriert, Player-Controller, Movement
-2. **Rooms** – Alle 12 Räume bauen mit Door-Points und Item-Spawns
-3. **Generator** – Graph-basiertes Layout, Connections, Seeds
-4. **Guard AI** – State-Machine, Persönlichkeiten, Sight/Hearing
-5. **Items** – Item-Resources, Loot-Tables, Inventar
-6. **Multiplayer** – Lobby, RPCs, Sync, Game-Manager
-7. **Emergent Systems** – Sound-Propagation, Events, Interaktionen
-8. **Proximity Voice** – Discord-integration oder Ingame-Voice
-9. **UI/UX** – Main Menu, HUD, Feedback
-10. **Polish** – Juice, VFX, SFX, Maps, Balancing
-
----
-
-## Monetization
-
-- **Launch Price:** $5-8
-- **Platform:** PC (Steam oder Itch.io)
-- **Warum?** Niedrige Einstieghürde, viral-potential durch Clips, Friendslop-Markt
-- **Kein P2W** – keine Mikrotransaktionen, einmal kaufen und friendsloppen
+1. Core Setup – Projekt, easy-peasy integriert, Player-Controller
+2. Rooms – 12 Räume mit Door-Points, Item-Spawns
+3. Generator – Graph-Layout, Connections, Seeds
+4. Guard AI – State-Machine, Persönlichkeiten, Sight/Hearing
+5. Items – Resources, Loot-Tables, Inventar
+6. Multiplayer – Lobby, RPCs, Sync
+7. Emergent Systems – Sound/Licht/Alarm/Tarnung-Layer, Events
+8. Charakter-Editor + ProgressionManager (Rap Sheet, Cosmetics)
+9. Proximity Voice
+10. UI/UX
+11. Polish – Juice, VFX, SFX, Balancing
 
 ---
 
-## Namensvorschläge (als Entscheidungshilfe)
+## 14. Monetization
 
-1. **The Slammer** – kurz, catchy, sofort verständlich
-2. **Block Party** – Zellenblock + Party, Friendslop-Vibe
-3. **BreakOUT** – doppeldeutig, leicht zu merken
-4. **Jailbreak** – klassisch aber solide
-5. **Hoosegow** – alter Slang, klingt mysteriös (rekrap-Style)
-6. **The Ditch** – "We're ditching this place"
-7. **Out** – ein Wort, minimalistisch
-8. **FriendslopEZPZ** – aktueller Dev-Name, beschreibt was es ist
+- Launch: $5–8, PC (Steam/Itch.io)
+- Kein P2W, keine Mikrotransaktionen – Rap-Sheet rein zeitbasiert/kosmetisch
+- Viral-Potential durch Clips, Friendslop-Zielgruppe
+
+---
+
+## 15. Namensvorschläge
+
+1. **Lockdown Party** – Alarm-System-Begriff + Friendslop-Vibe
+2. **Cellmates** – warm, funny, Co-op-Fokus im Namen
+3. **BreakOUT** – doppeldeutig
+4. **The Slammer** – kurz, catchy
+5. **Riot Hour** – klingt nach Chaos-Systemen
+6. **Jailbreak** – Klassiker
+7. **Out** – minimalistisch, brandbar

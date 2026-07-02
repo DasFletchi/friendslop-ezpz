@@ -113,31 +113,28 @@ Es gibt kein "halte schlüssel und rohrbombe in der hand um zu escapen" man muss
 
 ### 6.1 Room-Templates? (12, erweiterbar)
 
-| Raum | Security | Besonderheit |
-|------|----------|--------------|
-| Cellblock | 0 | Startraum, immer da |
-| Cafeteria | 0 | Viel Platz, Essensausgabe (Ablenkungs-Hub) |
-| Guard Office | 2 | Alarm-Button, Kameras steuerbar |
-| Yard | 0 | Offen, freie Sicht, Hund-Event möglich |
-| Infirmary | 1 | Medkits, Skalpelle |
-| Storage | 1 | Zufälliger Loot, dunkel, Verstecken möglich |
-| Vent Shaft | 1 | Geheimgang zwischen Etagen |
-| Armory | 2 | Waffen + Keycards, stark bewacht |
-| Laundry | 0 | Uniformen (Tarnung), Versteck |
-| Shower | 0 | Offen, wenig Deckung, Dampf blockiert Sicht |
-| Library | 0 | Ruhig, Wachen patrouillieren selten |
-| Exit | 2 | Flucht-Endpunkt |
+| Raum         | Security | Besonderheit                                |
+| ------------ | -------- | ------------------------------------------- |
+| Cellblock    | 0        | Startraum, immer da                         |
+| Cafeteria    | 0        | Viel Platz, Essensausgabe (Ablenkungs-Hub)  |
+| Guard Office | 2        | Alarm-Button, Kameras steuerbar             |
+| Yard         | 0        | Offen, freie Sicht, Hund-Event möglich      |
+| Infirmary    | 1        | Medkits, Skalpelle                          |
+| Storage      | 1        | Zufälliger Loot, dunkel, Verstecken möglich |
+| Vent Shaft   | 1        | Geheimgang zwischen Etagen                  |
+| Armory       | 2        | Waffen + Keycards, stark bewacht            |
+| Laundry      | 0        | Uniformen (Tarnung), Versteck               |
+| Shower       | 0        | Offen, wenig Deckung, Dampf blockiert Sicht |
+| Library      | 0        | Ruhig, Wachen patrouillieren selten         |
+| Exit         | 2        | Flucht-Endpunkt                             |
 
 ### 6.2 Generierungslogik
 
 - Graph-basiert, Nodes + `door_points`
-- 6 Räume/Etage, 2 Etagen Standard, seed-basiert
+- 6 Räume/Etage, einstellige Etagen Standard, seed-basiert
 - Required Rooms (Cellblock, Exit), Restricted Rooms (1x pro Map), Weighted Selection
 - Extra Vent-Connections als Random-Shortcuts
 
-**Room-Zustände statt nur Room-Typen:** Jeder Raum hat zusätzlich zum Typ einen
-laufenden Systemzustand (Licht an/aus, Stromkreis, Lärmpegel, Wachenpräsenz).
-Der Raum-Typ ist die Bühne, der Zustand ist das, womit Spieler interagieren.
 
 ---
 
@@ -145,12 +142,12 @@ Der Raum-Typ ist die Bühne, der Zustand ist das, womit Spieler interagieren.
 
 ### 7.1 Die vier Kern-Systeme
 
-| System | Was es tut | Wie andere Systeme es nutzen |
-|--------|-----------|-------------------------------|
-| **Sound** | Jede Aktion erzeugt Lärm-Quelle mit Radius + Lautstärke, durch Wände abgeschwächt | Wachen reagieren, Lärm als Ablenkung, Proximity Voice ist Teil davon |
-| **Licht/Strom** | Stromkreise pro Sektion, überlastbar, abschaltbar | Dunkelheit senkt Wachen-Sichtradius, aber auch Spieler-Sicht |
-| **Autorität/Alarm** | Globaler Alarm-Meter pro Etage, steigt bei Verdacht, sinkt mit Zeit | Wachen-Verstärkung, Kamera-Aktivierung, Lockdown-Türen |
-| **Vertrauen/Tarnung** | Wärter-Uniform + unauffälliges Verhalten = niedrigere Entdeckungschance | Kombiniert mit Nähe, Blickwinkel, Wachen-Persönlichkeit |
+| System                | Was es tut                                                                         | Wie andere Systeme es nutzen                                         |
+| --------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Sound**             | Viele Aktion erzeugt Lärm-Quelle mit Radius + Lautstärke, durch Wände abgeschwächt | Wachen reagieren, Lärm als Ablenkung, Proximity Voice ist Teil davon |
+| **Licht/Strom**       | Stromkreise pro Sektion, überlastbar, abschaltbar                                  | Dunkelheit senkt Wachen-Sichtradius, aber auch Spieler-Sicht         |
+| **Autorität/Alarm**   | Globaler Alarm-Meter, steigt bei Verdacht, sinkt mit Zeit                          | Wachen-Verstärkung, Kamera-Aktivierung, Lockdown-Türen               |
+| **Vertrauen/Tarnung** | Wärter-Uniform + unauffälliges Verhalten = niedrigere Entdeckungschance            | Kombiniert mit Nähe, Blickwinkel, Wachen-Persönlichkeit              |
 
 ### 7.2 Wachen-Verhalten (5 Persönlichkeiten)
 
@@ -166,23 +163,20 @@ Der Raum-Typ ist die Bühne, der Zustand ist das, womit Spieler interagieren.
 
 **Wachen reden mit dem System, nicht mit Spielern direkt:** Eine Wache weiß nicht
 "Spieler X ist verdächtig", sie kennt nur Werte (Lärm-Event bei Position Y,
-Lautstärke Z). Exploits funktionieren *immer*, weil sie echte Systemregeln nutzen.
+Lautstärke Z). Exploits funktionieren *immer*, weil sie echte Systemregeln nutzen. Guards können miteinander reden.
 
 ### 7.3 System-Kombinationen (Beispiele)
 
 - Essensausgabe + Vent = Essen durchs Rohr schieben, Wache verlässt Posten
-- Stromkreis überlasten → Sicherung raus → Dunkelheit → aber auch Kameras tot
+- Stromkreis überlasten → Sicherung raus → Dunkelheit (wirklich dunkel) → aber auch Kameras tot
 - Feueralarm → Chaos-Modus, alle NPCs rennen zum Sammelpunkt, Spieler tauchen unter
-- Uniform aus Laundry + ruhiges Gehen = Tarnung, bricht bei Nahdistanz zu STRICT
 - Bestechung (Item an CORRUPT) senkt deren Alert-Radius für X Sekunden
-- **Mitgefangene als NPC-Systemteilnehmer** – Insassen sind Lärmquellen/Sichtblocker,
-  Herden-Tarnung in Gruppen
 
 ### 7.4 Spieler-Kombinationen
 
-- Spieler A redet laut mit Wache (Proximity Voice als Werkzeug), B schleicht vorbei
+- Spieler A redet laut mit Wache (Proximity Voice als Werkzeug, maybe ein kleines LLM (ganz klein unter 4b)), B schleicht vorbei
 - Spieler C löst Stromausfall aus, während A+B im Zielraum warten
-- Ein Spieler "opfert" sich (Einzelhaft/Cooldown statt Game Over), bindet Aufmerksamkeit
+- Ein Spieler "opfert" sich, bindet Aufmerksamkeit, kann auch noch gesaved werden. bis keine ahnung was passiert ngl :sob:
 
 **Faustregel:** Neues Feature = nur "E drücken, X passiert"? Abgelehnt, bis es an
 mindestens zwei der vier Kern-Systeme angebunden ist.
@@ -193,12 +187,14 @@ mindestens zwei der vier Kern-Systeme angebunden ist.
 
 ### 8.1 Item-Typen
 
-- **Tool** – Crowbar, Keycard, Wire Cutters, Uniform (Flucht-Requirements)
+- **Tool** – Crowbar, Keycard, Wire Cutters, Uniform (Flucht-Requirements) (errinert mich an granny ngl)
 - **Weapon** – Schraubenschlüssel, Skalpell, Brechstange (Doppelnutzung Werkzeug/Waffe)
 - **Food** – heilt, macht beim Essen Lärm (Trade-off)
 - **Key** – spezifische Türen
 - **Misc** – Zahnbürste (Waffe/Dietrich/Ablenkung), Spiegelscherbe (um Ecken schauen),
-  Seife (Boden glitschig = Ablenkungs-Trap)
+  Seife (Boden glitschig = Ablenkungs-Trap) (holy trailer von Cuffbust lol)
+**etwas braucht mindestes 2 usecases um drin zu sein**
+
 
 ### 8.2 Items als einziger Machtfaktor
 

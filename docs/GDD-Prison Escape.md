@@ -50,7 +50,7 @@ Drei harte Design-Gesetze:
   interagieren, nicht weil Content abgespult wird
 - **Gear + Skill, nie Klasse** – dein Charakter hat keine Attribute. Was du kannst,
   hängt davon ab, was du in der Runde findest und wie gut du es einsetzt
-- **Proximity Voice als Gameplay-Mechanik**, nicht nur Comfort-Feature
+- **Proximity Voice als Gameplay-Mechanik**, nicht nur Comfort-Feature, auch Items wie Walkie Talkies als common loot, weil den anderen spieler nicht zu hören nervig ist. Oder eine Andere art sich mit der Person abzusprechen.
 - **Wiederspielbarkeit durch Prozedural + Persönlichkeit**
 - **Clip-Fabrik** – jede Runde soll 1–2 screenrecordbare Momente produzieren
 
@@ -62,71 +62,56 @@ Drei harte Design-Gesetze:
 
 Dein Häftling ist **keine Klasse, keine Rolle, kein Build**. Er ist eine Hülle:
 Körper, Gesicht, Stimme, Nummer auf der Uniform. Zwei Spieler auf Level 1 und
-Level 80 sind **mechanisch identisch**, wenn die Zellentür aufgeht.
+Level 80 sind **mechanisch identisch**, wenn die Zellentür aufgeht. (Nur bildlisch gesagt es wird auch noch andere wege geben dem Gefängnis zu entkommen als einfach nur eine offene Tür)
 
 Sieg/Niederlage entsteht ausschließlich aus:
 
 1. **Gear** – was du in dieser konkreten Runde findest, trägst und kombinierst
 2. **Skill** – Timing, Kommunikation, Game-Sense, Entscheidungen unter Druck
 
-Keine Klassen, kein "der Hacker", kein "der Tank". Jeder Spieler ist ein
-General-Purpose-Häftling; die *Situation* bestimmt, wer gerade Ablenker, Schleicher
-oder Kämpfer ist – nicht ein Menü-Screen vor Rundenbeginn.
-
 ### 4.2 Charakter-Erstellung (rein kosmetisch)
 
 - Modularer Avatar-Baukasten: Kopf/Frisur/Bart, Körpertyp (rein visuell),
   Hautfarbe/Tattoos, Uniform-Variante (Farbe, Abnutzung, Patches)
 - Stimme: Pitch-Slider + Bark-Sets (Schmerzlaute, Ablenkungsrufe, "Psst"-Callouts) –
-  kosmetisch, keine Gameplay-Wirkung
-- Persönliche "Marke": freischaltbares Graffiti-Tag für die Zelle (siehe 4.4)
-
-### 4.3 Design-Begründung
-
-- **Fairness in Randomizer-Lobbies**: Wer joint, spielt sofort mit, ohne von einem
-  Grinder mit besserem Loadout dominiert zu werden
-- **Fokus auf Moment-to-Moment-Entscheidungen** statt Meta-Optimierung
-- **Passt zum Genre**: Prison Break lebt von Cleverness und Improvisation
+  kosmetisch, keine Gameplay-Wirkung. (Schedule 1?)
+- Persönliche "Marke": freischaltbares Graffiti-Tag für die Zelle? (siehe 4.4)
 
 ### 4.4 Progression – "Das Vorstrafenregister" (Rap Sheet)
 
 Account-weites Meta-System, ARC-Raiders-inspiriert, aber entschärft:
 
-- Jede Runde (auch gescheiterte Fluchten!) gibt XP → Account-Level
+- Jede Runde (auch gescheiterte Fluchten!) gibt XP → Spieler Level (NICHT ALWAYS ONLINE TYPE STUFF MEHR IN RICHTUNG GUNFIRE REBORN ODER SO)
 - Pro Level: 1 Punkt für den **Contraband-Baum** – Nodes bewusst *horizontal*:
   - **Kosmetik-Freischaltungen** (Hauptbelohnung): Uniform-Patterns, Tattoos,
-    Graffiti-Tags, Emotes, Voice-Barks
-  - **Mikro-Perks** (max. 3 gleichzeitig aktiv, wählbar vor Rundenstart):
-    kleine, klar kommunizierte Prozent-Werte, NIEMALS ein neues Verb.
-    Beispiele: "Leisere Schritte beim Rennen (−8%)", "Ein Inventarslot mehr",
-    "Schlösser 10% schneller knacken", "Uniform-Tarnung wird 5% später erkannt"
-  - **Keine Powerspikes:** Perks verschieben Wahrscheinlichkeiten leicht, schalten
-    nie einen Lösungsweg frei, der Neulingen verwehrt bleibt
+    Graffiti-Tags, Emotes, Voice-Bark
   - **Respec jederzeit kostenlos** – Experimentieren fördern, nicht bestrafen
   - **Season Wipe / "Lockdown"-Event** (optional): kosmetische Season-Rewards,
-    kein Gameplay-Vorteil über Runden hinaus
+    kein Gameplay-Vorteil über Runden hinaus. Maybe Expeditionen wie in ARC-Raides
+Dass hört sich jetzt hier ja schon alles an wie "ich mache dass nächste life service game" hier müsste nochmal entschärft werden.
+
 
 **Design-Grenze:** Das Rap Sheet existiert für den Dranbleib-Loop, darf aber nie der
 Grund sein, warum ein Team gewinnt. Wenn ein Level-1-Spieler mit gutem Gear und
-Timing genauso gut fliehen kann wie ein Level-80-Spieler, funktioniert das System.
+Timing genauso gut fliehen kann wie ein Level-80-Spieler, funktioniert das System. Ausserdem sollte die progression nie der grund sein warum ein Spieler dass Spiel spielt, er sollte es spielen weil es ihm Spass macht wie in ARC Raiders wo man reinkommt einach nur für den thrill einer Runde.
 
 ---
 
 ## 5. Game Flow
 
-1. **Lobby** – Host erstellen/IP joinen, Name + Aussehen wählen, Ready-Check
+1. **Lobby** – Host erstellen/IP joinen, Name + Aussehen wählen, Ready-Check (Gefängnis bus Setting?)
 2. **Rundenstart** – Gefängnis wird prozedural generiert (Seed),
    Wachen-Persönlichkeiten gewürfelt, 1–2 Random Events aktiv
 3. **Playing** – Spawn im Cellblock, Flucht-Requirements unbekannt bis erkundet,
    Loot sammeln, Wachen umgehen/ablenken/austricksen
 4. **Flucht-Fenster** – Requirements erfüllt → Exit öffnet, Uhr tickt
-5. **Rundenende** – Recap (wer hat was gemacht, lustigste Momente), zurück zur Lobby
-
+5. **Rundenende** – Recap, was getan wurde, und um strategie zu verbessern auch mit routen die man gelaufen ist.
+Es gibt kein "halte schlüssel und rohrbombe in der hand um zu escapen" man muss schon richtig physisch escapen auch ohne einfache item requirements. 
 ---
 
 ## 6. Room-System & Prozedurale Generierung
 
-### 6.1 Room-Templates (12, erweiterbar)
+### 6.1 Room-Templates? (12, erweiterbar)
 
 | Raum | Security | Besonderheit |
 |------|----------|--------------|

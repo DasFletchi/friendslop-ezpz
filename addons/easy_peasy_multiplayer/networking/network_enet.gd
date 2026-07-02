@@ -12,12 +12,12 @@ func _ready() -> void:
 
 #region Network-Specific Functions
 ## Creates an ENet server using any information provided in [param connection_info]. For ENet, this consists of a port which, unless specified, will default to the [member DEFAULT_PORT].
-func become_host(connection_info = DEFAULT_PORT):
+func become_host(connection_info = DEFAULT_PORT) -> void:
 	var error = peer.create_server(connection_info, Network.room_size)
 	if error:
 		if Network._is_verbose:
 			print("Error creating host: %s" % error_string(error))
-		return error
+		return
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 
 	multiplayer.multiplayer_peer = peer
@@ -45,7 +45,7 @@ func join_as_client(connection_info = connector):
 	if error:
 		if Network._is_verbose:
 			print("ENet client failed to connect to server %s:%d with error: %s" % [ip, port, error_string(error)])
-		return error
+		return
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 
 	multiplayer.multiplayer_peer = peer

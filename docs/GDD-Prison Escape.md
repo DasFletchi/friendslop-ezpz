@@ -276,4 +276,4 @@ Item-Platzierung, offene/verschlossene Türen, Hund ja/nein – pro Runde neu ge
 2. **Jailbreak** – Klassiker
 
 
-## VISUAL BIBLE
+# [[VISUAL BIBLE]]

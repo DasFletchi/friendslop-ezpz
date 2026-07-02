@@ -1,19 +1,22 @@
 extends Node2D
 @onready var h_box_container: HBoxContainer = $"2nd Screen/HBoxContainer"
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func _on_play_button_pressed() -> void:
-	pass # Replace with function body.
+@onready var singleplayer_button: Button = $VBoxContainer/Singleplayer
+@onready var multiplayer_button: Button = $VBoxContainer/Multiplayer
 
 
 func _on_multiplayer_button_pressed() -> void:
 	h_box_container.show()
+	multiplayer_button.hide()
+
+func _on_singleplayer_button_pressed() -> void:
+	singleplayer_button.hide()
+
+
+func _on_enet_pressed() -> void:
+	Network.set_network_type(NetworkEnet)
+
+func _on_steam_pressed() -> void:
+	Network.set_network_type(NetworkSteam)
+	for child in steam_lobby_list.get_children():
+		child.queue_free()
+	Network.active_network.list_lobbies()

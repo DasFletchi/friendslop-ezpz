@@ -19,11 +19,11 @@ offset_top = 260.0
 offset_right = 749.0
 offset_bottom = 334.0
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1069703388]
+[node name="Singleplayer" type="Button" parent="VBoxContainer" unique_id=1069703388]
 layout_mode = 2
 text = "Singleplayer"
 
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=583964896]
+[node name="Multiplayer" type="Button" parent="VBoxContainer" unique_id=583964896]
 layout_mode = 2
 text = "Multiplayer"
 
@@ -31,18 +31,20 @@ text = "Multiplayer"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="2nd Screen" unique_id=794607381]
 visible = false
-offset_left = 478.0
+offset_left = 535.0
 offset_top = 295.0
-offset_right = 682.0
+offset_right = 642.0
 offset_bottom = 326.0
 
-[node name="Button" type="Button" parent="2nd Screen/HBoxContainer" unique_id=1363907834]
+[node name="Enet" type="Button" parent="2nd Screen/HBoxContainer" unique_id=1363907834]
 layout_mode = 2
-text = "Singleplayer"
+text = "ENet"
 
-[node name="Button2" type="Button" parent="2nd Screen/HBoxContainer" unique_id=2133488971]
+[node name="Steam" type="Button" parent="2nd Screen/HBoxContainer" unique_id=2133488971]
 layout_mode = 2
-text = "Multiplayer"
+text = "Steam"
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_multiplayer_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Singleplayer" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Multiplayer" to="." method="_on_multiplayer_button_pressed"]
+[connection signal="pressed" from="2nd Screen/HBoxContainer/Enet" to="." method="_on_enet_pressed"]
+[connection signal="pressed" from="2nd Screen/HBoxContainer/Steam" to="." method="_on_steam_pressed"]

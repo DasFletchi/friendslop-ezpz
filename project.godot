@@ -28,6 +28,13 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray("res://addons/easy_peasy_multiplayer/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://docs/": "purple"
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

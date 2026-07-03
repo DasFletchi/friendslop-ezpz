@@ -16,7 +16,11 @@ func _on_enet_pressed() -> void:
 	Network.set_network_type(NetworkEnet)
 
 func _on_steam_pressed() -> void:
-	Network.set_network_type(NetworkSteam)
-	for child in steam_lobby_list.get_children():
-		child.queue_free()
-	Network.active_network.list_lobbies()
+	# Steam-Code nur ausführen, wenn steam_lobby_list existiert
+	if get_node_or_null("steam_lobby_list"):
+		Network.set_network_type(NetworkSteam)
+		for child in $steam_lobby_list.get_children():
+			child.queue_free()
+		Network.active_network.list_lobbies()
+	else:
+		print("Steam-Lobby-UI nicht gefunden. Überspringe Steam-Initialisierung.")

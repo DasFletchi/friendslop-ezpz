@@ -22,5 +22,6 @@ func _on_steam_pressed() -> void:
 		for child in $steam_lobby_list.get_children():
 			child.queue_free()
 		Network.active_network.list_lobbies()
+	
 	else:
 		print("Steam-Lobby-UI nicht gefunden. Überspringe Steam-Initialisierung.")

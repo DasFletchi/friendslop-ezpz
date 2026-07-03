@@ -26,7 +26,7 @@ func _ready() -> void:
 
 #Steam DRM check
 	if OWNED == false:
-	print("Steam DRM check failed: Game not owned.")
+		print("Steam DRM check failed: Game not owned.")
 		#get_tree().quit() #like said i will allow piracy if you cant afford it
 
 

@@ -25,6 +25,10 @@ Network="*uid://cq3b8bnp6no5g"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[easy_peasy_multiplayer]
+
+steam/enable_steam=true
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/easy_peasy_multiplayer/plugin.cfg", "res://addons/godotsteam/plugin.cfg")
@@ -47,7 +51,7 @@ rendering_device/driver.windows="d3d12"
 [steam]
 
 initialization/app_data/app_type=0
-initialization/app_data/app_id=0
+initialization/app_data/app_id=480
 initialization/app_data/demo_id=0
 initialization/app_data/playtest_id=0
 initialization/app_data/tool_id=0

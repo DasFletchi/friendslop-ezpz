@@ -14,12 +14,6 @@ It focuses on simple, fun gameplay and serves as a compact project for experimen
 - Uses the easy-peasy plugin
 - Simple and lightweight game project
 
-## Getting Started
-
-1. Open the project in Godot.
-2. Make sure the easy-peasy plugin is installed and enabled.
-3. Run the project from the Godot editor.
-
 ## License
 
-Add your license information here.
+only looks pls dont do stuff with the project tnx

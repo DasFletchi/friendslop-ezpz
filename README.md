@@ -1,6 +1,6 @@
 # Jailbreak
 
-A small game project made with Godot using the easy-peasy plugin. GDD and approach found in docs folder
+A small game project made with Godot using the easy-peasy plugin. GDD and approach found in docs folder as markdown files (i use obsidian)
 
 ## License
 

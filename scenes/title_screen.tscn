@@ -40,10 +40,6 @@ offset_bottom = 326.0
 layout_mode = 2
 text = "ENet"
 
-[node name="Steam" type="Button" parent="2nd Screen/HBoxContainer" unique_id=2133488971]
-layout_mode = 2
-text = "Steam"
-
 [node name="EnetTab" type="VBoxContainer" parent="2nd Screen" unique_id=3001]
 visible = false
 offset_left = 480.0
@@ -73,7 +69,6 @@ text = "Back"
 [connection signal="pressed" from="VBoxContainer/Singleplayer" to="." method="_on_singleplayer_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Multiplayer" to="." method="_on_multiplayer_button_pressed"]
 [connection signal="pressed" from="2nd Screen/HBoxContainer/Enet" to="." method="_on_enet_pressed"]
-[connection signal="pressed" from="2nd Screen/HBoxContainer/Steam" to="." method="_on_steam_pressed"]
 [connection signal="text_submitted" from="2nd Screen/EnetTab/IP" to="." method="_on_enet_ip_submitted"]
 [connection signal="pressed" from="2nd Screen/EnetTab/EnetButtons/Host" to="." method="_on_enet_host_pressed"]
 [connection signal="pressed" from="2nd Screen/EnetTab/EnetButtons/Join" to="." method="_on_enet_join_pressed"]

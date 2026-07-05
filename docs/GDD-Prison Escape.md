@@ -218,25 +218,8 @@ Stellschraube für Schwierigkeitskurve.
 
 ---
 
-## ~~9. Multiplayer & Networking~~
-
-### ~~9.1 easy-peasy-multiplayer (2.0-refactor)~~
-
-- ~~Plugin übernimmt MultiplayerPeers, Lobby-Erstellung, Netzwerk-Switching,~~
-  ~~Server-Verbindungen~~
-- ~~Kein Steam nötig, reines ENet, IP-basiert (später optional Lobby-Code-Layer, z.b. mit Steam)~~
-- ~~2–6 Spieler~~
-- ~~RPC-basierte Aktionen (`collect_requirement`, `movement`, `interact`, ...)~~
-
-### ~~9.2 Architektur (Autoloads)~~
-
-- ~~**NetworkManager** – Peer-Connections, Spielerliste, Host-Migration (Stretch)~~
-- ~~**GameManager** – Rundenlogik, State-Machine, Escape-Conditions~~
-- ~~**PrisonGenerator** – generiert serverseitig, Seed-Sync via RPC~~
-- ~~**ProgressionManager** – Rap-Sheet-Daten lokal pro Client~~
-  
-  
-  CURRENTLY THINKING OF ALTERNATIVES
+## 9. Multiplayer & Networking
+will probably be Netfox Noray or Tube (although i think its gonna be noray)
 
 ---
 

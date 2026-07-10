@@ -1,0 +1,183 @@
+[gd_resource type="Resource" script_class="GoPlacerPalette" format=3 uid="uid://c7pio2d7rq3h4"]
+
+[ext_resource type="Script" uid="uid://c255osinwj7ln" path="res://addons/go_placer/palette/go_placer_palette_entry.gd" id="1_ui36m"]
+[ext_resource type="Script" uid="uid://dac0srqvwyg62" path="res://addons/go_placer/palette/go_placer_palette.gd" id="2_0aj5k"]
+[ext_resource type="PackedScene" uid="uid://drvbt01janxv1" path="res://assets/Modular Blueprint Kit/glTF/RP_1X2.gltf" id="2_srcxo"]
+[ext_resource type="PackedScene" uid="uid://q57akdgvsjsv" path="res://assets/Modular Blueprint Kit/glTF/FL_1X1.gltf" id="3_srcxo"]
+[ext_resource type="PackedScene" uid="uid://che3dcy8oh6sd" path="res://assets/Modular Blueprint Kit/glTF/FL_2X2.gltf" id="4_ry8si"]
+[ext_resource type="PackedScene" uid="uid://bblbo2r0jy2oj" path="res://assets/Modular Blueprint Kit/glTF/FL_4X4.gltf" id="5_hetwd"]
+[ext_resource type="PackedScene" uid="uid://dx11tc7f4lu80" path="res://assets/Modular Blueprint Kit/glTF/FL_8X8.gltf" id="6_apktc"]
+[ext_resource type="PackedScene" uid="uid://cci80aj0xjyti" path="res://assets/Modular Blueprint Kit/glTF/RP_1X4.gltf" id="7_x4eh6"]
+[ext_resource type="PackedScene" uid="uid://cqd0tvn6xeyn4" path="res://assets/Modular Blueprint Kit/glTF/RP_1X6.gltf" id="8_22nun"]
+[ext_resource type="PackedScene" uid="uid://bkbcne4qptuss" path="res://assets/Modular Blueprint Kit/glTF/RP_2X2.gltf" id="9_u6363"]
+[ext_resource type="PackedScene" uid="uid://cahncv4hxgmum" path="res://assets/Modular Blueprint Kit/glTF/RP_2X4.gltf" id="10_2y2uo"]
+[ext_resource type="PackedScene" uid="uid://c5ew7f0g4uxyf" path="res://assets/Modular Blueprint Kit/glTF/RP_2X6.gltf" id="11_uobu2"]
+[ext_resource type="PackedScene" uid="uid://cwn8hmtfg8hyc" path="res://assets/Modular Blueprint Kit/glTF/RP_4X2.gltf" id="12_duxs8"]
+[ext_resource type="PackedScene" uid="uid://1j3lpve77kr8" path="res://assets/Modular Blueprint Kit/glTF/RP_4X4.gltf" id="13_xb1n2"]
+[ext_resource type="PackedScene" uid="uid://c8xjuk3qanksv" path="res://assets/Modular Blueprint Kit/glTF/RP_4X6.gltf" id="14_5odni"]
+[ext_resource type="PackedScene" uid="uid://b0g68lvbawd5t" path="res://assets/Modular Blueprint Kit/glTF/WL_1X1.gltf" id="15_etv0d"]
+[ext_resource type="PackedScene" uid="uid://m6fm5mlkslbj" path="res://assets/Modular Blueprint Kit/glTF/WL_1X1_HALF.gltf" id="16_otfly"]
+[ext_resource type="PackedScene" uid="uid://thwbgt0qxx6b" path="res://assets/Modular Blueprint Kit/glTF/WL_1X2.gltf" id="17_grd5f"]
+[ext_resource type="PackedScene" uid="uid://dqw4yybyl7p7t" path="res://assets/Modular Blueprint Kit/glTF/WL_1X2_HALF.gltf" id="18_gu76t"]
+[ext_resource type="PackedScene" uid="uid://b0p7mnrgi45e" path="res://assets/Modular Blueprint Kit/glTF/WL_1X4.gltf" id="19_pbk6g"]
+[ext_resource type="PackedScene" uid="uid://c4r7gy0gyxc6l" path="res://assets/Modular Blueprint Kit/glTF/WL_1X4_HALF.gltf" id="20_mlp7y"]
+[ext_resource type="PackedScene" uid="uid://cvgwy3pu7lqq5" path="res://assets/Modular Blueprint Kit/glTF/WL_CORNER.gltf" id="21_kp25h"]
+[ext_resource type="PackedScene" uid="uid://61b4bctuy3yq" path="res://assets/Modular Blueprint Kit/glTF/WL_CROSS.gltf" id="22_106y7"]
+[ext_resource type="PackedScene" uid="uid://cl0ockkl8cb13" path="res://assets/Modular Blueprint Kit/glTF/WL_DOOR.gltf" id="23_lv63i"]
+[ext_resource type="PackedScene" uid="uid://jl2yyxv0knso" path="res://assets/Modular Blueprint Kit/glTF/WL_TJUNCTION.gltf" id="24_cn6m8"]
+[ext_resource type="PackedScene" uid="uid://wxauruiuc8qd" path="res://assets/Modular Blueprint Kit/glTF/WL_WINDOW.gltf" id="25_htooa"]
+
+[sub_resource type="Resource" id="Resource_ry8si"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("2_srcxo")
+display_name = "RP_1X2"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_hetwd"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("3_srcxo")
+display_name = "FL_1X1"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_apktc"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("4_ry8si")
+display_name = "FL_2X2"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_wdy28"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("5_hetwd")
+display_name = "FL_4X4"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_impjy"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("6_apktc")
+display_name = "FL_8X8"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_1er7r"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("2_srcxo")
+display_name = "RP_1X2"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_ljeq8"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("7_x4eh6")
+display_name = "RP_1X4"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_231ab"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("8_22nun")
+display_name = "RP_1X6"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_ojuob"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("9_u6363")
+display_name = "RP_2X2"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_axjmt"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("10_2y2uo")
+display_name = "RP_2X4"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_edeyi"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("11_uobu2")
+display_name = "RP_2X6"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_rdttr"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("12_duxs8")
+display_name = "RP_4X2"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_eo8xt"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("13_xb1n2")
+display_name = "RP_4X4"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_2toko"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("14_5odni")
+display_name = "RP_4X6"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_h3ouo"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("15_etv0d")
+display_name = "WL_1X1"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_kbm3v"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("16_otfly")
+display_name = "WL_1X1_HALF"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_ts81q"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("17_grd5f")
+display_name = "WL_1X2"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_lp5fo"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("18_gu76t")
+display_name = "WL_1X2_HALF"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_jndns"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("19_pbk6g")
+display_name = "WL_1X4"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_1jyjg"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("20_mlp7y")
+display_name = "WL_1X4_HALF"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_xlmjq"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("21_kp25h")
+display_name = "WL_CORNER"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_dt3ac"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("22_106y7")
+display_name = "WL_CROSS"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_k52ek"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("23_lv63i")
+display_name = "WL_DOOR"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_ss6lj"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("24_cn6m8")
+display_name = "WL_TJUNCTION"
+tags = PackedStringArray()
+
+[sub_resource type="Resource" id="Resource_3d6hr"]
+script = ExtResource("1_ui36m")
+asset = ExtResource("25_htooa")
+display_name = "WL_WINDOW"
+tags = PackedStringArray()
+
+[resource]
+script = ExtResource("2_0aj5k")
+palette_name = "prototype"
+entries = Array[ExtResource("1_ui36m")]([SubResource("Resource_ry8si"), SubResource("Resource_hetwd"), SubResource("Resource_apktc"), SubResource("Resource_wdy28"), SubResource("Resource_impjy"), SubResource("Resource_1er7r"), SubResource("Resource_ljeq8"), SubResource("Resource_231ab"), SubResource("Resource_ojuob"), SubResource("Resource_axjmt"), SubResource("Resource_edeyi"), SubResource("Resource_rdttr"), SubResource("Resource_eo8xt"), SubResource("Resource_2toko"), SubResource("Resource_h3ouo"), SubResource("Resource_kbm3v"), SubResource("Resource_ts81q"), SubResource("Resource_lp5fo"), SubResource("Resource_jndns"), SubResource("Resource_1jyjg"), SubResource("Resource_xlmjq"), SubResource("Resource_dt3ac"), SubResource("Resource_k52ek"), SubResource("Resource_ss6lj"), SubResource("Resource_3d6hr")])

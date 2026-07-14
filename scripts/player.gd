@@ -1,8 +1,25 @@
 extends CharacterBody3D
+@export var mouse_sensitivity: float = 0.005
+@onready var camera: Camera3D = $Camera3D
 
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _unhandled_input(event: InputEvent) -> void: #unhandled inputs heist eif nur, wenn niemand anders bisher sich das hier geholt hat dann hol ich es mir halt
+	if event is InputEventMouseMotion: #ohne input map auf shit zugreifen/is dieses event eine a
+		rotate_y(-event.relative.x * mouse_sensitivity) #event.relative.x ist: Wie weit die Maus seit dem letzten Frame horizontal bewegt wurde.
+		camera.rotate_x(-event.relative.y * mouse_sensitivity)
+		#it makes sense but it doesnt i guess please just with the rotate x and y thingies its annoying fr
+		#because in this cruel world rotate y means looking left/right we dont have the camera before that bc its fine if the whole player turns that fine its even wanted for nice fps movement
+		#but on the next x = y  and no we dont actually want to change the y rotation of the player then we'd fly thats not so cool
+# also warum auch immer: 
+#Maus X-Bewegung → Rotation um Y-Achse
+#Maus Y-Bewegung → Rotation um X-Achse
+
 
 
 func _physics_process(delta: float) -> void:
@@ -11,7 +28,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("space") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.

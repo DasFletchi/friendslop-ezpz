@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c5vxxt0ryg3ax"]
 
+[ext_resource type="Script" uid="uid://b0350gi31rkk4" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://61b4bctuy3yq" path="res://assets/Modular Blueprint Kit/glTF/WL_CROSS.gltf" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://wxauruiuc8qd" path="res://assets/Modular Blueprint Kit/glTF/WL_WINDOW.gltf" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dranyd23io7tw" path="res://scenes/player.tscn" id="3_sugp2"]
@@ -17,6 +18,7 @@ sky = SubResource("Sky_o5qli")
 volumetric_fog_density = 0.0308
 
 [node name="Main" type="Node3D" unique_id=1884375871]
+script = ExtResource("1_jyhfs")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2012963988]
 environment = SubResource("Environment_0wfyh")

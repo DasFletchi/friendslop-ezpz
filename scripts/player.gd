@@ -1,7 +1,12 @@
 extends CharacterBody3D
 @export var mouse_sensitivity: float = 0.005
+@export var anim_transition_time: float = 0.5
 @onready var camera: Camera3D = $Camera3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+
+
+
 
 
 const SPEED = 5.0
@@ -9,6 +14,9 @@ const JUMP_VELOCITY = 4.5
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	animation_player.playback_default_blend_time = anim_transition_time #geiles godot feature damit man nicht so snappy von animation zu animation wechselt
+
+
 
 func _unhandled_input(event: InputEvent) -> void: #unhandled inputs heist eif nur, wenn niemand anders bisher sich das hier geholt hat dann hol ich es mir halt
 	if event is InputEventMouseMotion: #ohne input map auf shit zugreifen/is dieses event eine a

@@ -46,4 +46,6 @@ func _physics_process(delta: float) -> void:
 
 
 	if velocity == Vector3.ZERO:
-			animation_player.play("idle")
+		animation_player.play("idle")
+	else:
+		animation_player.play("walk")

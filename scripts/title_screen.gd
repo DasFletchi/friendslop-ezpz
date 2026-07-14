@@ -7,7 +7,7 @@ extends Node2D
 
 func _on_singleplayer_button_pressed() -> void:
 	print("temp singleplayer button")
-
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _on_multiplayer_button_pressed() -> void:
 	print("multiplayer button pressed")

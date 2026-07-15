@@ -57,6 +57,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+	# Don't interrupt the shoot animation with idle/walk
+	if animation_player.current_animation == "shoot" and animation_player.is_playing():
+		return
+	
 	if velocity == Vector3.ZERO:
 		animation_player.play("idle")
 	else:

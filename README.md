@@ -1,51 +1,38 @@
 # Jailbreak
 
-Friendslop game made with the Godot easy-peasy plug in.
+Friendslop game made with the Godot game engine and the netfox suite
 
-## 🎮 Overview
+## Overview
 Jailbreak is a Godot project built in GDScript. This repository contains the game source, assets, and project configuration needed to run and iterate on the game.
 
-## 🧱 Tech Stack
-- **Engine:** Godot
-- **Language:** GDScript
+## License
 
-## 📦 Requirements
-- Godot Engine (recommended: latest stable version)
+Jailbreak is source-available software.
 
-## 🚀 Getting Started
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/DasFletchi/Jailbreak.git
-   ```
-2. Open Godot.
-3. Click **Import** and select the `project.godot` file in the cloned folder.
-4. Open the project and press **Play** to run.
+You are allowed to:
+- View and study the source code
+- Create personal modifications and builds for private use
+- Submit contributions and improvements
+- Create and share non-commercial modifications for personal or community use, as long as they do not redistribute the original game, source code, or assets as a standalone project or replacement for official releases
 
-## 🗂️ Project Structure
-Typical important files/folders in a Godot project:
-- `project.godot` – project configuration
-- `scenes/` – game scenes
-- `scripts/` – gameplay and logic scripts
-- `assets/` – art/audio/resources
+You are not allowed to:
+- Sell this project or modified versions of it
+- Distribute modified or unmodified versions of the project without explicit permission from the creator
+- Use the game's assets, code, or content in other projects unrelated to Jailbreak, or distribute them separately from Jailbreak, without explicit permission from the creator
+- Claim ownership or authorship of the project or its original content
+- Attempt to bypass these restrictions by any means, including but not limited to rebranding, repackaging, or redistributing the project in another form without explicit permission from the creator
+- Rebrand, rename, or present the project or its contents as your own work
 
-> If your structure differs, update this section to match your actual folders.
+Contributions submitted to this project may be used, modified, and distributed as part of Jailbreak by the creator.
 
-## 🛠️ Development
-- Use Godot editor for scene/script changes.
-- Keep scripts and scenes modular.
-- Test frequently in-editor to catch gameplay issues early.
+Contributors retain credit for their work but do not gain ownership rights over the project or revenue generated from it.
 
-## 🤝 Contributing
-Contributions are welcome.
+Contributors must only submit content that they have the right to contribute.
 
-1. Fork the repo
-2. Create a feature branch
-3. Commit your changes
-4. Open a pull request
+This software is provided "as is", without warranty of any kind.
 
-## 📄 License
-No license is currently specified.
-If you want open-source contributions, consider adding a `LICENSE` file (for example MIT).
+The creator retains all rights to the project at all times, including but not limited to the rights to monetize, archive, modify, discontinue, or remove the project at any time.
 
-## 🙌 Credits
-Created by [@DasFletchi](https://github.com/DasFletchi)
+Official releases of Jailbreak may be distributed through platforms such as Steam or itch.io. Compiling the source code for personal use is allowed, but purchasing official releases supports the creator. :)
+
+For commercial usage, strict no.

@@ -53,3 +53,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08751, 0, -1.3004456)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1991777, 0, -0.81898403)
 
 [node name="Player" parent="." unique_id=1070925469 instance=ExtResource("4_ikeim")]
+
+[node name="Mutliplayer temp menu" type="CanvasLayer" parent="." unique_id=1576663919]
+
+[node name="PanelContainer" type="PanelContainer" parent="Mutliplayer temp menu" unique_id=1535822173]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Mutliplayer temp menu/PanelContainer" unique_id=1737456149]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Mutliplayer temp menu/PanelContainer/VBoxContainer" unique_id=690953676]
+layout_mode = 2
+text = "--==MULTIPLAYER==--"
+
+[node name="Host" type="Button" parent="Mutliplayer temp menu/PanelContainer/VBoxContainer" unique_id=473521978]
+layout_mode = 2
+text = "Host"
+
+[node name="Join" type="Button" parent="Mutliplayer temp menu/PanelContainer/VBoxContainer" unique_id=984306378]
+layout_mode = 2
+text = "Join 	"
+
+[node name="AdressEntry" type="LineEdit" parent="Mutliplayer temp menu/PanelContainer/VBoxContainer" unique_id=324528107]
+layout_mode = 2
+placeholder_text = "Enter Addres to join"

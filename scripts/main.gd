@@ -22,6 +22,7 @@ func _on_host_pressed() -> void:
 	# aber der Host ist der besondere Peer, der den Server betreibt
 	# und normalerweise die Autorität über den Spielzustand hat.
 	# Seine Peer-ID ist meistens 1.
+	# ja kein echtes true decentrilaized p2p aber fick mich ich nem nur das was ez in der high level scheisse drin ist nein danke. (ander e wäre highkey eh einfach nur ein sumppf gewesen (bruh ich habe einen 90m minütigen exkurs betrieben dafür alr?)
 
 func _on_join_pressed() -> void:
 	pass

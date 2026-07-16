@@ -56,25 +56,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1991777, 0, -0.81898403)
 
 [node name="Mutliplayer temp menu" type="CanvasLayer" parent="." unique_id=1576663919]
 
-[node name="PanelContainer" type="PanelContainer" parent="Mutliplayer temp menu" unique_id=1535822173]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="tempMPMenu" type="PanelContainer" parent="Mutliplayer temp menu" unique_id=1535822173]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Mutliplayer temp menu/PanelContainer" unique_id=1737456149]
+[node name="VBoxContainer" type="VBoxContainer" parent="Mutliplayer temp menu/tempMPMenu" unique_id=1737456149]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Mutliplayer temp menu/PanelContainer/VBoxContainer" unique_id=690953676]
+[node name="Label" type="Label" parent="Mutliplayer temp menu/tempMPMenu/VBoxContainer" unique_id=690953676]
 layout_mode = 2
-text = "--==MULTIPLAYER==--"
+text = "==MULTIPLAYER=="
+horizontal_alignment = 1
 
-[node name="Host" type="Button" parent="Mutliplayer temp menu/PanelContainer/VBoxContainer" unique_id=473521978]
+[node name="Host" type="Button" parent="Mutliplayer temp menu/tempMPMenu/VBoxContainer" unique_id=473521978]
 layout_mode = 2
 text = "Host"
 
-[node name="Join" type="Button" parent="Mutliplayer temp menu/PanelContainer/VBoxContainer" unique_id=984306378]
+[node name="Join" type="Button" parent="Mutliplayer temp menu/tempMPMenu/VBoxContainer" unique_id=984306378]
 layout_mode = 2
 text = "Join 	"
 
-[node name="AdressEntry" type="LineEdit" parent="Mutliplayer temp menu/PanelContainer/VBoxContainer" unique_id=324528107]
+[node name="AdressEntry" type="LineEdit" parent="Mutliplayer temp menu/tempMPMenu/VBoxContainer" unique_id=324528107]
 layout_mode = 2
 placeholder_text = "Enter Addres to join"
+alignment = 1
+
+[connection signal="pressed" from="Mutliplayer temp menu/tempMPMenu/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Mutliplayer temp menu/tempMPMenu/VBoxContainer/Join" to="." method="_on_join_pressed"]

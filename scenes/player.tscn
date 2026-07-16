@@ -107,5 +107,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5931903, -0.25676894)
 [node name="Gun" parent="Camera3D" unique_id=1009971148 instance=ExtResource("2_g2els")]
 transform = Transform3D(-0.2, 0, -3.019916e-08, 0, 0.2, 0, 3.019916e-08, 0, -0.2, 0.448649, -0.23510087, -0.4048763)
 
+[node name="Crosshair" type="Control" parent="Camera3D" unique_id=1918591149]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CrossV" type="ColorRect" parent="Camera3D/Crosshair" unique_id=960928067]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -8.0
+offset_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.9)
+
+[node name="CrossH" type="ColorRect" parent="Camera3D/Crosshair" unique_id=1154949523]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.9)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2126180778]
 libraries/ = SubResource("AnimationLibrary_qhqgy")

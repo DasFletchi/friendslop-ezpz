@@ -36,3 +36,6 @@ The creator retains all rights to the project at all times, including but not li
 Official releases of Jailbreak may be distributed through platforms such as Steam or itch.io. Compiling the source code for personal use is allowed, but purchasing official releases supports the creator. :)
 
 For commercial usage, strict no.
+
+
+alr bye have fun :)

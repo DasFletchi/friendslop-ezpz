@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cv1ril2ejq4e0" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://cluvjmu5ucde8" path="res://scenes/gun.tscn" id="2_g2els"]
-[ext_resource type="Script" path="res://scripts/crosshair.gd" id="3_crosshair"]
+[ext_resource type="Script" uid="uid://cqxr6fvowpx4q" path="res://scripts/crosshair.gd" id="3_crosshair"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_k7hc8"]
 
@@ -91,7 +91,7 @@ _data = {
 &"walk": SubResource("Animation_dqkch")
 }
 
-[node name="Player" type="CharacterBody3D" unique_id=1070925469]
+[node name="tempPlayer" type="CharacterBody3D" unique_id=1070925469]
 script = ExtResource("1_3vyb7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1654876221]
@@ -111,12 +111,12 @@ transform = Transform3D(-0.2, 0, -3.019916e-08, 0, 0.2, 0, 3.019916e-08, 0, -0.2
 [node name="Crosshair" type="Node2D" parent="Camera3D" unique_id=1918591149]
 script = ExtResource("3_crosshair")
 
-[node name="CrossV" type="Line2D" parent="Camera3D/Crosshair"]
+[node name="CrossV" type="Line2D" parent="Camera3D/Crosshair" unique_id=1868357934]
 points = PackedVector2Array(0, -8, 0, 8)
 width = 2.0
 default_color = Color(1, 1, 1, 0.9)
 
-[node name="CrossH" type="Line2D" parent="Camera3D/Crosshair"]
+[node name="CrossH" type="Line2D" parent="Camera3D/Crosshair" unique_id=914290503]
 points = PackedVector2Array(-8, 0, 8, 0)
 width = 2.0
 default_color = Color(1, 1, 1, 0.9)

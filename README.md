@@ -1,6 +1,6 @@
 # Jailbreak
 
-Friendslop game made with the Godot game engine and the netfox suite
+Friendslop game made with the Godot game engine and the netfox suite.
 
 ## Overview
 Jailbreak is a Godot project built in GDScript. This repository contains the game source, assets, and project configuration needed to run and iterate on the game.

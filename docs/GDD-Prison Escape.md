@@ -1,10 +1,8 @@
 # GDD – *Jailbreak*
 
-**Engine:** Godot 4.7+ (Forward+), reines GDScript, kein C#
 **Genre:** Co-op Prison Escape (Emergent Immersive Sim + Chaos)
-**Networking:** easy-peasy-multiplayer (2.0-refactor Branch), ENet, kein Steam nötig
+
 **Spieleranzahl:** 2–6 (Sweetspot 3–4)
-**Target Price:** $5–8 Launch
 
 ---
 

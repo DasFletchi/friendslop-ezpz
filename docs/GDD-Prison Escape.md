@@ -2,7 +2,7 @@
 
 **Genre:** Co-op Prison Escape (Emergent Immersive Sim + Chaos)
 
-**Spieleranzahl:** 2–6 (Sweetspot 3–4)
+**Spieleranzahl:** 2–6
 
 ---
 

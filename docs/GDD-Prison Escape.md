@@ -1,7 +1,5 @@
 # GDD – *Jailbreak*
 
-**Genre:** Co-op Prison Escape (Emergent Immersive Sim + Chaos)
-
 **Spieleranzahl:** 2–6
 
 ---
@@ -10,12 +8,7 @@
 
 Du wachst in einer Zelle auf. Du kennst niemanden. Du hast nichts. In 15–20 Minuten
 musst du mit ein paar Fremden (deinen Freunden) aus einem Gefängnis fliehen, das nie
-zweimal gleich aussieht, bewacht von Wachen, die nie zweimal gleich reagieren.
-Es gibt kein Skript, das dir sagt "so gewinnst du" – es gibt nur Systeme, die
-aufeinanderprallen. 
-
-
-Man kann auch verlieren da du ohnehin schon im Todestrakt bist oder so können Sie einfach gleich das ganze Gefängnis vergaß man Leben umbringen in diesen Trakt.
+zweimal gleich aussieht, bewacht von Wachen, die nie zweimal gleich reagieren. Warum 15-20 Minuten? Weil keine Ahnung dann du/einer aus der Gruppe zum Todestrakt geführt wirst oder so idk. Als incentive oder lore oder so. 
 
 ---
 
@@ -35,8 +28,7 @@ Drei harte Design-Gesetze:
 2. **Kein Skript ersetzt eine Regel.** Keine "wenn Spieler X tut, dann Cutscene Y" –
    alles läuft über Zustände (State Machines, Werte, Trigger-Schwellen), die für
    Spieler *lesbar* und *ausnutzbar* sind.
-3. **Fairness kommt aus Transparenz, nicht aus Balance.** Der Spieler darf verlieren,
-   weil er einen Fehler gemacht hat, den er hätte sehen können – nie weil ein
+3. **Fairness kommt aus Transparenz, nicht aus Balance.** Der Spieler darf verlieren, weil er einen Fehler gemacht hat, den er hätte sehen können – nie weil ein
    Würfelwurf im Hintergrund unsichtbar gegen ihn lief.
 
 ---

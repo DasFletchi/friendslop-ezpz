@@ -22,18 +22,28 @@ Nicht
 - MÜSSEN in der ersten Sekunde INSTANT recognizeable sein (Silhuette MUSS stimmen)
 - Orangle/Schwarz weisse kleidung? (wenn schwarz weiss dann muss der spieler sonst wo krass raustechen)
 
-**AUSBRECHNER**
-***Beispielsweise***:
-- großer Oberkörper
-- kleine Beine
-- Grosse Hände
-- Simples gesicht (nur mund, augen (maybe brauen?)) 
+- Sträflingskleidung (Klassisch Orange oder Schwarz-Weiß gestreift) (an Robbery Bob (mobile Game) angelehnt?                                                                                                                                                    
+- Jedes Outfit braucht ein klares visuelles Gimmick (z.B. riesige goldene Ketten, Kronen, Tattoos im Face, kaputte Masken) (earnbare cosmetics?)
+
+
+**3D Silhuette für Inmate**
+- Großer Kopf oder sehr markante Frisur/Kopfbedeckung, damit man sie auf einen Blick von den Wachen unterscheidet.
+
+***Formen der Silhouette für Inmate***
+- Etwas gebückte Haltung (Ready for action)                                                                                                                                                      
+- Breiter, kompakter Oberkörper
+- Handschellen-Reste an den HandgElenk als Cosmetic?
+- sehr dünn und schlagsick weil GefängnisEssenRationen und so
+  
+
+
+
 
 ***Guard***
 - Grose schulter weil autorität
 - big ass helm
 - helle taschenlampen?
-- kleiner kop
+- kleiner Kopf
 
 
 
@@ -99,10 +109,8 @@ Wenn man die Figur als schwarzen Schatten siehst:
 - erkennst du „Guard“ sofort?
 - erkennst du Typ?
 
-Wenn nein → zurück ins Designgefängnis.
 
-
-### MAYBE??
+### MAYBE?? (Guard Archetype)
 ### 1. „THE BRICK“
 - alles breit, schwer, langsam
 - T-Form
@@ -127,11 +135,6 @@ Wenn Guards blocky sind:
 
 Wenn Guards vertikal sind
 → Spieler eher kompakt & chaotic
-
-Sonst passiert das hier:
-
-> alles sieht gleich aus  
-> niemand versteht was passiert  
 
 ---
 
